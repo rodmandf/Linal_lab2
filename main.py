@@ -1,22 +1,24 @@
+import numpy as np
+import matplotlib.pyplot as plt
 from DataGenerator import data_generator
 from perceptron import Perceptron
-import numpy as np
 
 def main():
+    X, y = data_generator(m=1000, n=30, seed=42)
 
-    X,y = data_generator(1000000,30,seed=40)
+    split = 800
+    X_train, y_train = X[:split], y[:split]
+    X_test, y_test = X[split:], y[split:]
 
-    split = 900000
-    X_train,y_train = X[:split], y[:split]
-    X_test,y_test = X[split:], y[split:]
+    model = Perceptron(n_features=30, lr=0.01)
+    loss_history, acc_history = model.fit(X_train, y_train, epochs=200, verbose=False)
 
-    model = Perceptron(n_features=30, lr=0.1)
-    model.fit(X_train,y_train,epochs=63,verbose=True)
+    plt.figure(figsize=(8,4))
+    plt.plot(loss_history, label='Loss')
+    plt.xlabel('Epoch'); plt.ylabel('Value'); plt.title('Training Loss and Accuracy')
+    plt.plot(acc_history, label='Accuracy')
+    plt.legend()
+    plt.show()
 
-    y_pred = (model.predict(X_test) >= 0.5).astype(int)
-    accuracy = np.mean(y_pred == y_test)
-    print(f"Test accuracy: {accuracy:.4f}")
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
