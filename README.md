@@ -20,34 +20,23 @@
 ## 3. Математическая модель
 
 ### Активация и предсказание
-\[
-z = X \cdot w + b
-\]
+[ z = X \cdot w + b ]
 
-\[
-\hat{y} = \sigma(z) = \frac{1}{1 + e^{-z}}
-\]
+[ \hat{y} = \sigma(z) = \frac{1}{1 + e^{-z}} ]
 
-### Функция потерь и точность
+## Функция потерь и точность
+
 Используется кросс-энтропийная функция потерь:
-\[
-J(w, b) = -\frac{1}{m} \sum_{i=1}^{m} \Big[ y^{(i)} \log(\hat{y}^{(i)}) + (1 - y^{(i)}) \log(1 - \hat{y}^{(i)}) \Big]
-\]
+$$ J(w, b) = -\frac{1}{m} \sum_{i=1}^{m} \Big[ y^{(i)} \log(\hat{y}^{(i)}) + (1 - y^{(i)}) \log(1 - \hat{y}^{(i)}) \Big] $$
 
 Точность классификации:
-\[
-Accuracy = \frac{1}{m} \sum_{i=1}^{m} [\hat{y}^{(i)} \ge 0.6 == y^{(i)}]
-\]
+$$ Accuracy = \frac{1}{m} \sum_{i=1}^{m} [\hat{y}^{(i)} \ge 0.6 == y^{(i)}] $$
 
-### Обновление весов
-\[
-w := w - \alpha \cdot \frac{1}{m} X^T (\hat{y} - y)
-\]
+## Обновление весов
 
-\[
-b := b - \alpha \cdot \frac{1}{m} \sum (\hat{y} - y)
-\]
+$$ w := w - \alpha \cdot \frac{1}{m} X^T (\hat{y} - y) $$
 
+$$ b := b - \alpha \cdot \frac{1}{m} \sum (\hat{y} - y) $$
 ---
 
 ## 4. Описание реализации
